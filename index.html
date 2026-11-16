@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Hub Pulse</title>
+  <meta name="description" content="ตัวเลขหน้างาน ABBTG-A แบบเรียลไทม์">
+  <meta name="theme-color" content="#5b4bdb">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Hub Pulse">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <img src="icons/icon.svg" alt="" width="36" height="36">
+      <div>
+        <h1>Hub Pulse</h1>
+        <p class="sub"><span id="hub">—</span> · รายงาน <span id="reportTime">—</span></p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button id="btnRefresh" class="icon-btn" aria-label="ดึงข้อมูลใหม่" title="ดึงข้อมูลใหม่">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M17.65 6.35A7.96 7.96 0 0 0 12 4a8 8 0 1 0 7.73 10h-2.08A6 6 0 1 1 12 6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+      </button>
+      <button id="btnSettings" class="icon-btn" aria-label="ตั้งค่า" title="ตั้งค่า">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M19.14 12.94a7.14 7.14 0 0 0 0-1.88l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7 7 0 0 0-1.63-.94l-.36-2.54A.5.5 0 0 0 13.9 2h-3.8a.5.5 0 0 0-.49.42l-.36 2.54a7 7 0 0 0-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.71 8.48a.5.5 0 0 0 .12.64l2.03 1.58a7.14 7.14 0 0 0 0 1.88l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32c.13.22.39.3.6.22l2.39-.96c.5.38 1.05.7 1.63.94l.36 2.54c.05.24.25.42.49.42h3.8c.24 0 .44-.18.49-.42l.36-2.54a7 7 0 0 0 1.63-.94l2.39.96c.22.08.47 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58zM12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <div id="banner" class="banner" hidden></div>
+
+  <main>
+    <section class="card hero">
+      <div class="hero-head">
+        <span class="label">Delivered To Buyer</span>
+        <span class="pill" id="completePct">—</span>
+      </div>
+      <div class="hero-num"><span id="delivered">—</span> <small>/ <span id="inHubHero">—</span> Pcs.</small></div>
+      <div class="bar" role="progressbar" aria-label="Complete %" aria-valuemin="0" aria-valuemax="100" id="completeBar"><span></span></div>
+    </section>
+
+    <section class="grid">
+      <div class="card kpi"><span class="label">In Hub</span><span class="num" id="inHub">—</span><span class="unit">Pcs.</span></div>
+      <div class="card kpi"><span class="label">Assign</span><span class="num" id="assign">—</span><span class="unit">Pcs.</span></div>
+      <div class="card kpi" id="noAssignCard"><span class="label">No Assign</span><span class="num" id="noAssign">—</span><span class="unit">Pcs.</span></div>
+      <div class="card kpi">
+        <span class="label">HC Active</span><span class="num" id="hcActive">—</span><span class="unit">คน</span>
+        <span class="split">2W <b id="hc2W">—</b> · 4W <b id="hc4W">—</b></span>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="row-head"><span class="label">PDTY Assign</span><span class="muted">Target <b id="pdtyTarget">—</b></span></div>
+      <div class="hero-num sm"><span id="pdtyAssign">—</span></div>
+      <div class="bar" role="progressbar" aria-label="PDTY เทียบ Target" aria-valuemin="0" aria-valuemax="100" id="pdtyBar"><span></span></div>
+    </section>
+
+    <section class="grid">
+      <div class="card kpi">
+        <span class="label">WL เฉลี่ย <span id="ratio">—</span></span>
+        <span class="split big">2W <b id="wl2W">—</b></span>
+        <span class="split big">4W <b id="wl4W">—</b></span>
+      </div>
+      <div class="card kpi">
+        <span class="label">%Assign</span>
+        <span class="split big">2W <b id="pct2WAssign">—</b></span>
+        <span class="split big">4W <b id="pct4WAssign">—</b></span>
+      </div>
+      <div class="card kpi wide">
+        <span class="label">SLA <span class="muted">(ค่าที่กำหนดในชีต)</span></span>
+        <span class="num" id="sla">—</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <span class="label">Issue หน้างาน</span>
+      <p class="note" id="issue">—</p>
+      <span class="label">Action</span>
+      <p class="note" id="action">—</p>
+    </section>
+
+    <p class="foot">ดึงข้อมูลล่าสุด <span id="fetchedAt">—</span> · แหล่งข้อมูล: ชีต DailySummary</p>
+  </main>
+
+  <div class="dock">
+    <button id="btnCopy" class="primary" disabled>คัดลอก Daily Report</button>
+  </div>
+
+  <dialog id="settings">
+    <form method="dialog" id="settingsForm">
+      <h2>ตั้งค่าแหล่งข้อมูล</h2>
+      <label>Web App URL (Apps Script)
+        <input id="inUrl" type="url" required placeholder="https://script.google.com/macros/s/…/exec" autocomplete="off">
+      </label>
+      <label>Key
+        <input id="inKey" type="password" required autocomplete="off">
+      </label>
+      <p class="muted small">ค่าทั้งสองเก็บไว้ในเครื่องนี้เท่านั้น</p>
+      <p id="settingsMsg" class="small" role="status"></p>
+      <div class="dlg-actions">
+        <button type="button" id="btnCancel" class="ghost">ยกเลิก</button>
+        <button type="submit" id="btnSave" class="primary">บันทึกและทดสอบ</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
